@@ -1,14 +1,18 @@
 'use client';
 import PagesContainer from 'components/pages/PagesContainer';
+import PagesContent from 'components/pages/PagesContent';
 import PagesNavbar from 'components/pages/PagesNavbar';
-import ThemeProvider from 'components/themes/ThemeProvider';
+import AppThemeProvider from 'components/themes/ThemeProvider';
+import useThemeToggle from 'components/themes/useThemeModeToggle';
 
 export default function Home() {
+  const {darkMode, toggleMode} = useThemeToggle();
   return (
-    <ThemeProvider>
+    <AppThemeProvider darkMode={darkMode}>
       <PagesContainer>
-        <PagesNavbar />
+        <PagesNavbar toggleMode={toggleMode} darkMode={darkMode} />
+        <PagesContent />
       </PagesContainer>
-    </ThemeProvider>
+    </AppThemeProvider>
   );
 }

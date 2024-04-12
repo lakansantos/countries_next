@@ -1,8 +1,16 @@
 import React from 'react';
-import {Box, IconButton, Typography} from '@mui/material';
-import {FiMoon} from 'react-icons/fi';
+import {Box, IconButton, Typography, useTheme} from '@mui/material';
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 
-const PagesNavbar = () => {
+type PagesNavbarProps = {
+  darkMode: boolean;
+  toggleMode: () => void;
+};
+const PagesNavbar = (props: PagesNavbarProps) => {
+  const {darkMode, toggleMode} = props;
+
+  const theme = useTheme();
   return (
     <Box
       sx={{
@@ -11,10 +19,10 @@ const PagesNavbar = () => {
         alignItems: 'center',
         display: 'flex',
         width: 'inherit',
-        backgroundColor: 'hsl(0, 0, 100%)',
+        backgroundColor: theme.palette.secondary.main,
         padding: '0 70px',
         height: '70px',
-        boxShadow: '1px 1px 5px hsl(0, 0%, 89%)',
+        boxShadow: darkMode ? null : '1px 1px 5px hsl(0, 0%, 89%)',
       }}
     >
       <Typography variant="h5" fontWeight={600}>
@@ -30,8 +38,22 @@ const PagesNavbar = () => {
           height: 'fit-content',
         }}
       >
-        <IconButton aria-label="toggle mode">
-          <FiMoon fontSize={18} color="black" />
+        <IconButton aria-label="toggle mode" onClick={() => toggleMode()}>
+          {darkMode ? (
+            <DarkModeOutlinedIcon
+              sx={{
+                fontSize: 20,
+                color: theme.palette.primary.main,
+              }}
+            />
+          ) : (
+            <WbSunnyOutlinedIcon
+              sx={{
+                fontSize: 20,
+                color: theme.palette.primary.main,
+              }}
+            />
+          )}
         </IconButton>
 
         <Typography variant="body1">Dark Mode</Typography>
