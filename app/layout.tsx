@@ -1,11 +1,11 @@
 import type {Metadata} from 'next';
-import {Roboto} from 'next/font/google';
+import {Nunito_Sans} from 'next/font/google';
 import './globals.css';
 
-const roboto = Roboto({
+const nunito = Nunito_Sans({
   subsets: ['latin'],
   style: ['normal'],
-  weight: ['400', '700'],
+  weight: ['300', '600', '800'],
 });
 
 export const metadata: Metadata = {
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en">
-      <body className={roboto.className}>{children}</body>
+      <body className={nunito.className}>{children}</body>
     </html>
   );
 }
