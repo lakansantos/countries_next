@@ -14,7 +14,7 @@ const SelectRegion = () => {
   const [selected, setSelected] = useState<string>('');
 
   const theme = useTheme();
-  const isDarkMode = theme.palette.mode;
+  const isDarkMode = theme.palette.mode === 'dark';
 
   const handleChange = (event: SelectChangeEvent<typeof selected>) => {
     const {
