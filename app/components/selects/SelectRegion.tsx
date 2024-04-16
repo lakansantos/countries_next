@@ -31,7 +31,6 @@ const SelectRegion = () => {
         value={selected}
         sx={{
           width: '100%',
-          minWidth: '250px',
           borderRadius: '5px',
           border: 'none',
           '& .MuiSelect-select': {
