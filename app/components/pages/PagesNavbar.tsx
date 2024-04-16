@@ -1,14 +1,12 @@
+'use client';
 import React from 'react';
 import {Box, IconButton, Typography} from '@mui/material';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
+import {useThemeToggle} from 'app/hooks/useThemeModeToggle';
 
-type PagesNavbarProps = {
-  darkMode: boolean;
-  toggleMode: () => void;
-};
-const PagesNavbar = (props: PagesNavbarProps) => {
-  const {darkMode, toggleMode} = props;
+const PagesNavbar = () => {
+  const {darkMode, toggleMode} = useThemeToggle();
 
   return (
     <Box

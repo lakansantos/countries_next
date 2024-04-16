@@ -1,12 +1,41 @@
 'use client';
 import {createTheme, ThemeProvider} from '@mui/material';
-import React, {ReactNode} from 'react';
+import React, {ReactNode, useEffect, useState} from 'react';
 
 type ThemeWithProps = {
   children: ReactNode;
-  darkMode: boolean;
 };
-const AppThemeProvider: React.FC<ThemeWithProps> = ({children, darkMode}) => {
+
+export const ThemeToggleContext = React.createContext({
+  toggleMode: () => {},
+  darkMode: false,
+});
+
+const AppThemeProvider: React.FC<ThemeWithProps> = ({children}) => {
+  const isBrowser = typeof window !== 'undefined';
+
+  const [darkMode, setDarkMode] = useState(false);
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    if (isBrowser) {
+      setDarkMode(localStorage.getItem('darkMode') === 'dark');
+    }
+  }, [isBrowser]);
+  const toggleMode = () => {
+    setDarkMode(!darkMode);
+  };
+
+  useEffect(() => {
+    if (isMounted) {
+      localStorage.setItem('darkMode', darkMode ? 'dark' : 'light');
+    } else {
+      return;
+    }
+  }, [darkMode, isMounted]);
+
   const theme = createTheme({
     typography: {
       fontFamily: 'nunato',
@@ -33,7 +62,16 @@ const AppThemeProvider: React.FC<ThemeWithProps> = ({children, darkMode}) => {
       },
     },
   });
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+  return (
+    <ThemeToggleContext.Provider
+      value={{
+        toggleMode: toggleMode,
+        darkMode: darkMode,
+      }}
+    >
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+    </ThemeToggleContext.Provider>
+  );
 };
 
 export default AppThemeProvider;

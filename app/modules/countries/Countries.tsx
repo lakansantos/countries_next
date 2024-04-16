@@ -2,10 +2,15 @@ import {Box} from '@mui/material';
 import {COUNTRIES_API_URL} from 'app/configs/constants';
 import React from 'react';
 
+type Countries = {
+  name: {
+    common: string;
+  };
+}[];
 const Countries = async () => {
   const response = await fetch(COUNTRIES_API_URL);
-  const data = response.json();
-  console.log(data);
+  const data: Countries = await response.json();
+
   return (
     <Box
       sx={{
@@ -14,7 +19,9 @@ const Countries = async () => {
         overflowY: 'auto',
       }}
     >
-      test
+      {data.map((country, index) => {
+        return <p key={index}>{country.name.common}</p>;
+      })}
     </Box>
   );
 };

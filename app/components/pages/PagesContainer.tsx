@@ -1,8 +1,9 @@
-import React, {ReactNode} from 'react';
+'use client';
+import React from 'react';
 import {Box, useTheme} from '@mui/material';
 
 type ContainerProps = {
-  children: ReactNode;
+  children: React.ReactNode;
 };
 const PagesContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
   const {children} = props;
