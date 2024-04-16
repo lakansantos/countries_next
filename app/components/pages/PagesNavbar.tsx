@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, IconButton, Typography, useTheme} from '@mui/material';
+import {Box, IconButton, Typography} from '@mui/material';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 
@@ -10,7 +10,6 @@ type PagesNavbarProps = {
 const PagesNavbar = (props: PagesNavbarProps) => {
   const {darkMode, toggleMode} = props;
 
-  const theme = useTheme();
   return (
     <Box
       sx={{
@@ -19,8 +18,8 @@ const PagesNavbar = (props: PagesNavbarProps) => {
         alignItems: 'center',
         display: 'flex',
         width: 'inherit',
-        backgroundColor: theme.palette.secondary.main,
-        padding: '0 70px',
+        backgroundColor: 'secondary.main',
+        padding: {md: '0 70px', xs: '0 20px'},
         height: '70px',
         boxShadow: darkMode ? null : '1px 1px 5px hsl(0, 0%, 89%)',
       }}
@@ -40,23 +39,25 @@ const PagesNavbar = (props: PagesNavbarProps) => {
       >
         <IconButton aria-label="toggle mode" onClick={() => toggleMode()}>
           {darkMode ? (
-            <DarkModeOutlinedIcon
-              sx={{
-                fontSize: 20,
-                color: theme.palette.primary.main,
-              }}
-            />
-          ) : (
             <WbSunnyOutlinedIcon
               sx={{
                 fontSize: 20,
-                color: theme.palette.primary.main,
+                color: 'primary.main',
+              }}
+            />
+          ) : (
+            <DarkModeOutlinedIcon
+              sx={{
+                fontSize: 20,
+                color: 'primary.main',
               }}
             />
           )}
         </IconButton>
 
-        <Typography variant="body1">Dark Mode</Typography>
+        <Typography variant="body1">
+          {darkMode ? 'Light Mode' : 'Dark Mode'}
+        </Typography>
       </Box>
     </Box>
   );

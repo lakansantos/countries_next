@@ -2,8 +2,8 @@
 import PagesContainer from 'components/pages/PagesContainer';
 import PagesContent from 'components/pages/PagesContent';
 import PagesNavbar from 'components/pages/PagesNavbar';
-import AppThemeProvider from 'components/themes/ThemeProvider';
-import useThemeToggle from 'components/themes/useThemeModeToggle';
+import AppThemeProvider from 'app/ThemeProvider';
+import useThemeToggle from 'app/hooks/useThemeModeToggle';
 
 export default function Home() {
   const {darkMode, toggleMode} = useThemeToggle();
