@@ -1,6 +1,14 @@
-import {Box, Card, CardContent, CardMedia, Typography} from '@mui/material';
-import {COUNTRIES_API_URL} from 'app/configs/constants';
 import React from 'react';
+
+import {
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Tooltip,
+  Typography,
+} from '@mui/material';
+import {COUNTRIES_API_URL} from 'app/configs/constants';
 
 type Countries = {
   name: {
@@ -47,8 +55,8 @@ const Countries = async () => {
       }}
     >
       {data.map((country, index) => {
-        const {name, population, capital} = country;
-
+        const {name, population, region, flags, capital} = country;
+        const isCountryNameLong = name.common.length >= 20;
         return (
           <Card
             sx={{
@@ -64,20 +72,49 @@ const Countries = async () => {
                 width: {xs: '100%', sm: 230},
                 objectFit: 'contain',
               }}
-              image={country.flags.svg}
+              image={flags.svg}
               title="test"
             />
-            <CardContent>
-              <Typography variant="h6" sx={{mb: 1}} fontWeight={700}>
-                {name.common}
-              </Typography>
+            <CardContent
+              sx={{
+                width: {xs: '100%', sm: 230},
+                height: {xs: 250, sm: 150},
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-evenly',
+              }}
+            >
+              <Tooltip
+                title={isCountryNameLong ? name.common : ''}
+                placement="top"
+                arrow
+                slotProps={{
+                  tooltip: {
+                    sx: {
+                      bgcolor: '#000',
+                      '& .MuiTooltip-arrow': {
+                        color: '#000',
+                      },
+                    },
+                  },
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  noWrap={isCountryNameLong}
+                  sx={{mb: 1}}
+                  fontWeight={700}
+                >
+                  {name.common}
+                </Typography>
+              </Tooltip>
               <Typography variant="body2">
-                Population:
-                {population.toLocaleString()}
+                Population: {population.toLocaleString()}
               </Typography>
-              <Typography variant="body2">Region: {country.region}</Typography>
+              <Typography variant="body2">Region: {region || 'N/A'}</Typography>
               <Typography variant="body2">
-                Capital: {!!capital && capital.filter((v) => v).join(', ')}
+                Capital:{' '}
+                {!!capital ? capital.filter((v) => v).join(', ') : 'N/A'}
               </Typography>
             </CardContent>
           </Card>
