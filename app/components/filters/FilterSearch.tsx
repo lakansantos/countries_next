@@ -2,11 +2,18 @@
 import {TextField, useTheme} from '@mui/material';
 import React from 'react';
 import SearchIcon from '@mui/icons-material/Search';
+import {useRouter, useSearchParams} from 'next/navigation';
+import {queryParse, queryStringify} from 'configs/http';
 
 const FilterSearch = () => {
   const theme = useTheme();
-
   const darkMode = theme.palette.mode === 'dark';
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
+  const {search} = queryParse(params.toString()) || {};
+
   return (
     <TextField
       id="search"
@@ -21,6 +28,14 @@ const FilterSearch = () => {
         '& .MuiInputBase-input': {
           textIndent: '15px',
         },
+      }}
+      defaultValue={search || ''}
+      onChange={(e) => {
+        const search = e.target.value;
+        const query = {
+          search: search,
+        };
+        router.push('/' + '?' + queryStringify(query));
       }}
       InputProps={{
         disableUnderline: true,

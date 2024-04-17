@@ -7,6 +7,8 @@ import {
   SelectChangeEvent,
   useTheme,
 } from '@mui/material';
+import {useRouter} from 'next/navigation';
+import {queryStringify} from 'configs/http';
 
 const regions = ['Africa', 'America', 'Asia', 'Europe', 'Oceania'];
 
@@ -16,12 +18,18 @@ const SelectRegion = () => {
   const theme = useTheme();
   const isDarkMode = theme.palette.mode === 'dark';
 
+  const router = useRouter();
+
   const handleChange = (event: SelectChangeEvent<typeof selected>) => {
     const {
       target: {value},
     } = event;
 
     setSelected(value);
+
+    const query = queryStringify({region: value});
+
+    router.push('/' + '?' + query);
   };
   return (
     <FormControl fullWidth>

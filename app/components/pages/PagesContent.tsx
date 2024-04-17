@@ -1,3 +1,5 @@
+'use client';
+
 import {Box, Grid, Stack} from '@mui/material';
 import React from 'react';
 
@@ -5,7 +7,7 @@ import SelectRegion from 'components/selects/SelectRegion';
 import FilterSearch from 'components/filters/FilterSearch';
 import Countries from 'modules/countries/Countries';
 
-const PagesContent = () => {
+const PagesContent = ({data}: {data: Countries}) => {
   return (
     <Box
       sx={{
@@ -43,7 +45,7 @@ const PagesContent = () => {
             <SelectRegion />
           </Grid>
         </Grid>
-        <Countries />
+        <Countries data={data} />
       </Stack>
     </Box>
   );

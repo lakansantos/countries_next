@@ -8,24 +8,8 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import {COUNTRIES_API_URL} from 'app/configs/constants';
 
-type Countries = {
-  name: {
-    common: string;
-  };
-  flags: {
-    svg: string;
-    png: string;
-  };
-  region: string;
-  capital: string[];
-  population: number;
-}[];
-const Countries = async () => {
-  const response = await fetch(COUNTRIES_API_URL);
-  const data: Countries = await response.json();
-
+const Countries = ({data}: {data: Countries}) => {
   return (
     <Box
       sx={{
