@@ -77,7 +77,7 @@ const Countries = async () => {
             />
             <CardContent
               sx={{
-                width: {xs: '100%', sm: 230},
+                width: {xs: 325, sm: 230},
                 height: {xs: 250, sm: 150},
                 display: 'flex',
                 flexDirection: 'column',
@@ -102,7 +102,7 @@ const Countries = async () => {
                 <Typography
                   variant="h6"
                   noWrap={isCountryNameLong}
-                  sx={{mb: 1}}
+                  sx={{mb: 1, fontSize: {xs: 18}}}
                   fontWeight={700}
                 >
                   {name.common}
