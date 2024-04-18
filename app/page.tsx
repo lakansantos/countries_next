@@ -2,7 +2,7 @@ import PagesContainer from 'components/pages/PagesContainer';
 import PagesContent from 'components/pages/PagesContent';
 import PagesNavbar from 'components/pages/PagesNavbar';
 
-import useGetCountries from './hooks/useGetCountries';
+import useGetCountries from 'modules/countries/useGetCountries';
 
 export default async function Home() {
   const {data} = await useGetCountries();

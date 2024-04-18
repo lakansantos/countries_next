@@ -4,9 +4,12 @@ import {Box, IconButton, Typography} from '@mui/material';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 import {useThemeToggle} from 'app/hooks/useThemeModeToggle';
+import {useRouter} from 'next/navigation';
 
 const PagesNavbar = () => {
   const {darkMode, toggleMode} = useThemeToggle();
+
+  const router = useRouter();
 
   return (
     <Box
@@ -26,8 +29,12 @@ const PagesNavbar = () => {
       <Typography
         variant="h5"
         fontWeight={600}
+        onClick={() => router.push('/')}
         sx={{
           fontSize: {xs: 20, sm: 24},
+          '&:hover': {
+            cursor: 'pointer',
+          },
         }}
       >
         Where in the World?

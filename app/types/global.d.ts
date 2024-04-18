@@ -5,7 +5,7 @@ declare namespace NodeJS {
   }
 }
 
-type Countries = {
+type Country = {
   name: {
     common: string;
   };
@@ -16,4 +16,7 @@ type Countries = {
   region: string;
   capital: string[];
   population: number;
-}[];
+  cca2: string;
+};
+
+type Countries = Country[];

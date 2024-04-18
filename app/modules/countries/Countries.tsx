@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import {isEmpty} from 'lodash';
+import {useRouter} from 'next/navigation';
 
 const Countries = ({
   data = [],
@@ -24,6 +25,8 @@ const Countries = ({
       : data;
 
   const isEmptyData = isEmpty(_data);
+
+  const router = useRouter();
   return (
     <Box
       sx={{
@@ -33,6 +36,7 @@ const Countries = ({
         minHeight: {xs: '200px', md: '80%'},
         height: 'fit-content',
         overflowY: 'auto',
+        overflowX: 'hidden',
         flexWrap: 'wrap',
         gridGap: '1rem',
         justifyContent: isEmptyData
@@ -58,7 +62,7 @@ const Countries = ({
     >
       {!isEmptyData ? (
         _data?.map((country, index) => {
-          const {name, population, region, flags, capital} = country;
+          const {name, population, region, flags, cca2, capital} = country;
           const isCountryNameLong = name.common.length >= 20;
 
           return (
@@ -67,8 +71,14 @@ const Countries = ({
                 width: {xs: '100%', sm: 300},
                 height: {xs: 400, sm: 400},
                 bgcolor: 'secondary.main',
+                ':hover': {
+                  cursor: 'pointer',
+                  transform: 'scale(1.03)',
+                },
+                transition: '0.3s',
               }}
               key={index}
+              onClick={() => router.push('/' + cca2)}
             >
               <CardMedia
                 component="img"

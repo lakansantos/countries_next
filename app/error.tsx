@@ -2,7 +2,8 @@
 import {Box, Button, Typography} from '@mui/material';
 import React from 'react';
 import WarningIcon from '@mui/icons-material/Warning';
-const error = () => {
+
+const error = ({reset}: {reset: () => void}) => {
   return (
     <Box
       sx={{
@@ -27,13 +28,13 @@ const error = () => {
         </Typography>
         <Button
           variant="contained"
-          onClick={() => window.location.replace('/')}
+          onClick={() => reset()}
           sx={{
             mt: 3,
             backgroundColor: '#fff',
             color: '#000',
             '&:hover': {
-              background: '#fff',
+              background: '#rgb(236, 240, 241)',
             },
           }}
         >
