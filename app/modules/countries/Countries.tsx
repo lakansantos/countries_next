@@ -9,18 +9,24 @@ import {
   Typography,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import {isEmpty} from 'lodash';
 
 const Countries = ({data}: {data: Countries}) => {
+  const isEmptyData = isEmpty(data);
   return (
     <Box
       sx={{
+        display: 'grid',
         maxHeight: '650px',
+        gridTemplateColumns: `repeat(auto-fill,${isEmptyData ? 'auto' : '300px'} )`,
         minHeight: {xs: '100vh', md: '80%'},
         height: 'fit-content',
         overflowY: 'auto',
-        display: 'flex',
         flexWrap: 'wrap',
-        justifyContent: 'space-evenly',
+        gridGap: '1rem',
+        justifyContent: isEmptyData
+          ? 'center'
+          : {xs: 'center', sm: 'space-between'},
         alignItems: {xs: 'flex-start', sm: 'center'},
         gap: 3,
         '&::-webkit-scrollbar': {
