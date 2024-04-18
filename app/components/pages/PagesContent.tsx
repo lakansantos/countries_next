@@ -9,10 +9,16 @@ import Countries from 'modules/countries/Countries';
 
 import useSearch from 'components/filters/useSearch';
 import useSelectRegion from 'components/selects/useSelectRegion';
+import {COUNTRIES_API_URL} from 'app/configs/constants';
 
 const PagesContent = ({data}: {data: Countries}) => {
   const {searchedData, setSearchedData} = useSearch();
   const {selectedRegion, setSelectedRegion} = useSelectRegion();
+
+  const extendURL = 'all?fields=name,flags,population,region,capital,cca2';
+  const joinedURL = `${COUNTRIES_API_URL}/${extendURL}`;
+
+  console.log(joinedURL);
 
   return (
     <Box
