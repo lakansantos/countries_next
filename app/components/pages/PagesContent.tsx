@@ -8,9 +8,11 @@ import FilterSearch from 'components/filters/FilterSearch';
 import Countries from 'modules/countries/Countries';
 
 import useSearch from 'components/filters/useSearch';
+import useSelectRegion from 'components/selects/useSelectRegion';
 
 const PagesContent = ({data}: {data: Countries}) => {
   const {searchedData, setSearchedData} = useSearch();
+  const {selectedRegion, setSelectedRegion} = useSelectRegion();
 
   return (
     <Box
@@ -46,10 +48,16 @@ const PagesContent = ({data}: {data: Countries}) => {
             justifyContent="center"
             alignItems="center"
           >
-            <SelectRegion />
+            <SelectRegion
+              setSelectedRegion={setSelectedRegion}
+              selectedRegion={selectedRegion}
+            />
           </Grid>
         </Grid>
-        <Countries data={searchedData || data} />
+        <Countries
+          data={searchedData || data}
+          selectedRegion={selectedRegion}
+        />
       </Stack>
     </Box>
   );

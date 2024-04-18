@@ -11,8 +11,19 @@ import {
 import SearchIcon from '@mui/icons-material/Search';
 import {isEmpty} from 'lodash';
 
-const Countries = ({data = []}: {data: Countries | null}) => {
+const Countries = ({
+  data = [],
+  selectedRegion,
+}: {
+  data: Countries | null;
+  selectedRegion: string | null;
+}) => {
   const isEmptyData = isEmpty(data);
+
+  const _data =
+    !!selectedRegion && selectedRegion !== 'All'
+      ? data?.filter((country) => country.region === selectedRegion)
+      : data;
 
   return (
     <Box
@@ -47,7 +58,7 @@ const Countries = ({data = []}: {data: Countries | null}) => {
       }}
     >
       {!isEmptyData ? (
-        data?.map((country, index) => {
+        _data?.map((country, index) => {
           const {name, population, region, flags, capital} = country;
           const isCountryNameLong = name.common.length >= 20;
 

@@ -1,5 +1,5 @@
 'use client';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
   FormControl,
   MenuItem,
@@ -7,47 +7,33 @@ import {
   SelectChangeEvent,
   useTheme,
 } from '@mui/material';
-import {useRouter, useSearchParams} from 'next/navigation';
-import {queryParse, queryStringify} from 'configs/http';
 
-const regions = ['Africa', 'America', 'Asia', 'Europe', 'Oceania'];
+const regions = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania', 'All'];
 
-const SelectRegion = () => {
-  const searchParams = useSearchParams();
-  const params = new URLSearchParams(searchParams);
-
-  const query = queryParse(params.toString()) || {};
-  const {region} = query;
-
-  const [selected, setSelected] = useState<string>((region as string) || '');
-
+const SelectRegion = ({
+  selectedRegion,
+  setSelectedRegion,
+}: {
+  selectedRegion: string | null;
+  setSelectedRegion: (region: string) => void;
+}) => {
   const theme = useTheme();
   const isDarkMode = theme.palette.mode === 'dark';
 
-  const router = useRouter();
-
-  const handleChange = (event: SelectChangeEvent<typeof selected>) => {
+  const handleChange = (event: SelectChangeEvent<typeof selectedRegion>) => {
     const {
       target: {value},
     } = event;
 
-    setSelected(value);
-    if (query.search) delete query.search;
-
-    const _query = queryStringify({region: value});
-
-    router.push('/' + '?' + _query);
+    setSelectedRegion(value as string);
   };
 
-  useEffect(() => {
-    setSelected((region as string) || ''); // Update selected state when region changes
-  }, [region]);
   return (
     <FormControl fullWidth>
       <Select
         displayEmpty
         id="select-region"
-        value={selected}
+        value={selectedRegion || ''}
         sx={{
           width: '100%',
           borderRadius: '5px',
