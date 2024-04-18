@@ -66,7 +66,7 @@ const Countries = ({data}: {data: Countries}) => {
                   objectFit: 'cover',
                 }}
                 image={flags.svg}
-                title="test"
+                title={name.common || 'Country Image'}
               />
               <CardContent
                 sx={{
