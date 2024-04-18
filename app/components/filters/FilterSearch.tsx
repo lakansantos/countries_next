@@ -1,9 +1,9 @@
-'use client';
+import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
 import {TextField, useTheme} from '@mui/material';
-import React from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import {useRouter, useSearchParams} from 'next/navigation';
 import {queryParse, queryStringify} from 'configs/http';
+import {debounce} from 'lodash';
 
 const FilterSearch = () => {
   const theme = useTheme();
@@ -12,7 +12,35 @@ const FilterSearch = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
-  const {search} = queryParse(params.toString()) || {};
+  const query = queryParse(params.toString()) || {};
+
+  const {search} = query;
+
+  const [searchedValue, setSearchedValue] = useState(search || '');
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debouncedPush = useCallback(
+    debounce((search) => {
+      const _query = {search: search};
+
+      router.push('/' + '?' + queryStringify(_query));
+    }, 300),
+
+    [router]
+  );
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const search = e.target.value;
+
+    setSearchedValue(search);
+    debouncedPush(search);
+  };
+
+  useEffect(() => {
+    setSearchedValue(search as string);
+  }, [search]);
 
   return (
     <TextField
@@ -29,14 +57,8 @@ const FilterSearch = () => {
           textIndent: '15px',
         },
       }}
-      defaultValue={search || ''}
-      onChange={(e) => {
-        const search = e.target.value;
-        const query = {
-          search: search,
-        };
-        router.push('/' + '?' + queryStringify(query));
-      }}
+      value={searchedValue || ''}
+      onChange={(e) => handleChange(e)}
       InputProps={{
         disableUnderline: true,
         startAdornment: <SearchIcon fontSize="small" color="action" />,

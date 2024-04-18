@@ -14,15 +14,17 @@
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.14",
     "axios": "^1.5.1",
+    "clean-deep": "^3.4.0",
     "dotenv": "^16.4.5",
+    "lodash": "^4.17.21",
     "next": "13.5.5",
+    "qs": "^6.11.2",
     "react": "^18",
     "react-dom": "^18",
-    "clean-deep": "^3.4.0",
-    "react-icons": "^5.0.1",
-    "qs": "^6.11.2"
+    "react-icons": "^5.0.1"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

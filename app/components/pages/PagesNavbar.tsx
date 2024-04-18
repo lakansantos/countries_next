@@ -22,7 +22,13 @@ const PagesNavbar = () => {
         boxShadow: darkMode ? null : '1px 1px 5px hsl(0, 0%, 89%)',
       }}
     >
-      <Typography variant="h5" fontWeight={600}>
+      <Typography
+        variant="h5"
+        fontWeight={600}
+        sx={{
+          fontSize: {xs: 20, sm: 24},
+        }}
+      >
         Where in the World?
       </Typography>
       <Box
