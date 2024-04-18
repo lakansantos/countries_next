@@ -30,7 +30,7 @@ const Countries = ({
         display: 'grid',
         maxHeight: '650px',
         gridTemplateColumns: `repeat(auto-fill,${isEmptyData ? 'auto' : '300px'} )`,
-        minHeight: {xs: '100vh', md: '80%'},
+        minHeight: {xs: '200px', md: '80%'},
         height: 'fit-content',
         overflowY: 'auto',
         flexWrap: 'wrap',
@@ -38,7 +38,7 @@ const Countries = ({
         justifyContent: isEmptyData
           ? 'center'
           : {xs: 'center', sm: 'space-between'},
-        alignItems: {xs: 'flex-start', sm: 'center'},
+        alignItems: 'center',
         gap: 3,
         '&::-webkit-scrollbar': {
           width: '6px',
@@ -135,7 +135,7 @@ const Countries = ({
           justifyItems="center"
           alignItems="center"
         >
-          <SearchIcon fontSize="small" color="action" /> No country found
+          <SearchIcon fontSize="small" color="action" /> No results found
         </Typography>
       )}
     </Box>
