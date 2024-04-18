@@ -15,7 +15,7 @@ export default function Loading() {
       }}
     >
       <Box sx={{width: '50%', textAlign: 'center'}}>
-        <Typography variant="body1" color="primary.main">
+        <Typography variant="body1" color="#fff">
           Loading countries...
         </Typography>
         <LinearProgress />
