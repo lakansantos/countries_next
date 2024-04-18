@@ -13,6 +13,7 @@ import {isEmpty} from 'lodash';
 
 const Countries = ({data = []}: {data: Countries | null}) => {
   const isEmptyData = isEmpty(data);
+
   return (
     <Box
       sx={{
@@ -49,11 +50,12 @@ const Countries = ({data = []}: {data: Countries | null}) => {
         data?.map((country, index) => {
           const {name, population, region, flags, capital} = country;
           const isCountryNameLong = name.common.length >= 20;
+
           return (
             <Card
               sx={{
                 width: {xs: '100%', sm: 300},
-                height: {xs: 400, sm: 300},
+                height: {xs: 400, sm: 400},
                 bgcolor: 'secondary.main',
               }}
               key={index}
@@ -61,17 +63,15 @@ const Countries = ({data = []}: {data: Countries | null}) => {
               <CardMedia
                 component="img"
                 sx={{
-                  height: {xs: '50%', sm: 150},
-                  width: {xs: '100%', sm: 300},
-                  objectFit: 'cover',
+                  height: {xs: '50%'},
+                  width: {xs: '100%'},
+                  objectFit: 'fill',
                 }}
-                image={flags.svg}
-                title={name.common || 'Country Image'}
+                image={flags.png}
+                title={name.common + 'flag' || 'Country Image Flag'}
               />
               <CardContent
                 sx={{
-                  width: {xs: 325, sm: 230},
-                  height: {xs: '50%', sm: 150},
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-evenly',
