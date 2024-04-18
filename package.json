@@ -16,14 +16,17 @@
     "axios": "^1.5.1",
     "clean-deep": "^3.4.0",
     "dotenv": "^16.4.5",
+    "leaflet": "^1.9.4",
     "lodash": "^4.17.21",
     "next": "13.5.5",
     "qs": "^6.11.2",
     "react": "^18",
     "react-dom": "^18",
-    "react-icons": "^5.0.1"
+    "react-icons": "^5.0.1",
+    "react-leaflet": "^4.2.1"
   },
   "devDependencies": {
+    "@types/leaflet": "^1.9.11",
     "@types/lodash": "^4.17.0",
     "@types/node": "^20",
     "@types/react": "^18",

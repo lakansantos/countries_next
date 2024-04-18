@@ -9,6 +9,9 @@ type Country = {
   name: {
     common: string;
   };
+  capitalInfo: {
+    latlng: number[];
+  };
   flags: {
     svg: string;
     png: string;
