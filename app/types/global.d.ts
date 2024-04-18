@@ -1,4 +1,5 @@
 type ParsedUrlQueryInput = import('querystring').ParsedUrlQueryInput;
+type LatLngTuple = import('leaflet').LatLngTuple;
 declare namespace NodeJS {
   interface ProcessEnv {
     NEXT_PUBLIC_API_URL: string;
@@ -9,6 +10,7 @@ type Country = {
   name: {
     common: string;
   };
+  latlng: LatLngTuple;
   capitalInfo: {
     latlng: number[];
   };

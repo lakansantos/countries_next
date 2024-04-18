@@ -5,13 +5,11 @@ import dynamic from 'next/dynamic';
 import React from 'react';
 
 const ViewCountry = ({data}: {data: Country[]}) => {
-  const {name, population, region, capitalInfo, capital} = data[0];
+  const {name, population, region, latlng, capital} = data[0];
 
-  const MapLazyLoading = dynamic(() => import('modules/map/Map'), {
+  const Map = dynamic(() => import('modules/map/Map'), {
     loading: () => <p>Loading ...</p>,
   });
-
-  const {latlng} = capitalInfo;
 
   return (
     <Box
@@ -30,7 +28,7 @@ const ViewCountry = ({data}: {data: Country[]}) => {
 
       {capital}
 
-      <MapLazyLoading latlng={latlng} />
+      <Map latlng={latlng} />
     </Box>
   );
 };

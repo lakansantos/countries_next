@@ -32,6 +32,7 @@ const PagesNavbar = () => {
         onClick={() => router.push('/')}
         sx={{
           fontSize: {xs: 20, sm: 24},
+          userSelect: 'none',
           '&:hover': {
             cursor: 'pointer',
           },
