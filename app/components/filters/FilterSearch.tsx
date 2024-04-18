@@ -1,52 +1,44 @@
-import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
+'use client';
+import React, {ChangeEvent, useState} from 'react';
 import {TextField, useTheme} from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import {useRouter, useSearchParams} from 'next/navigation';
-import {queryParse, queryStringify} from 'configs/http';
-import {debounce} from 'lodash';
 
-const FilterSearch = () => {
+const FilterSearch = ({
+  data,
+  setSearchedData,
+}: {
+  data: Countries;
+  setSearchedData: (data: Countries | null) => void;
+}) => {
   const theme = useTheme();
   const darkMode = theme.palette.mode === 'dark';
 
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const params = new URLSearchParams(searchParams);
-  const query = queryParse(params.toString()) || {};
-
-  const {search} = query;
-
-  const [searchedValue, setSearchedValue] = useState(search || '');
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debouncedPush = useCallback(
-    debounce((search) => {
-      const _query = {search: search};
-
-      router.push('/' + '?' + queryStringify(_query));
-    }, 300),
-
-    [router]
-  );
-
+  const [inputValue, setInputValue] = useState('');
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const search = e.target.value;
+    setInputValue(e.currentTarget.value);
+    const filteredCountries = data
+      ? Object.values(data)?.filter((item) =>
+          item.name.common
+            .toUpperCase()
+            .includes(e.currentTarget.value.toUpperCase().trim())
+        )
+      : [];
 
-    setSearchedValue(search);
-    debouncedPush(search);
+    if (e.currentTarget.value.trim() === '') {
+      setSearchedData(null);
+    } else {
+      setSearchedData(filteredCountries);
+    }
   };
-
-  useEffect(() => {
-    setSearchedValue(search as string);
-  }, [search]);
 
   return (
     <TextField
       id="search"
       placeholder="Search for a country..."
       variant="standard"
+      value={inputValue || ''}
       sx={{
         bgcolor: 'secondary.main',
         width: '100%',
@@ -57,7 +49,6 @@ const FilterSearch = () => {
           textIndent: '15px',
         },
       }}
-      value={searchedValue || ''}
       onChange={(e) => handleChange(e)}
       InputProps={{
         disableUnderline: true,

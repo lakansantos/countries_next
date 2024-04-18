@@ -11,7 +11,7 @@ import {
 import SearchIcon from '@mui/icons-material/Search';
 import {isEmpty} from 'lodash';
 
-const Countries = ({data}: {data: Countries}) => {
+const Countries = ({data = []}: {data: Countries | null}) => {
   const isEmptyData = isEmpty(data);
   return (
     <Box
@@ -45,8 +45,8 @@ const Countries = ({data}: {data: Countries}) => {
         width: '100%',
       }}
     >
-      {data.length > 0 ? (
-        data.map((country, index) => {
+      {!isEmptyData ? (
+        data?.map((country, index) => {
           const {name, population, region, flags, capital} = country;
           const isCountryNameLong = name.common.length >= 20;
           return (

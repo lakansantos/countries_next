@@ -7,7 +7,11 @@ import SelectRegion from 'components/selects/SelectRegion';
 import FilterSearch from 'components/filters/FilterSearch';
 import Countries from 'modules/countries/Countries';
 
+import useSearch from 'components/filters/useSearch';
+
 const PagesContent = ({data}: {data: Countries}) => {
+  const {searchedData, setSearchedData} = useSearch();
+
   return (
     <Box
       sx={{
@@ -30,7 +34,7 @@ const PagesContent = ({data}: {data: Countries}) => {
           spacing={2}
         >
           <Grid item sm={12} md={6} xs={12} lg={4}>
-            <FilterSearch />
+            <FilterSearch data={data} setSearchedData={setSearchedData} />
           </Grid>
           <Grid
             container
@@ -45,7 +49,7 @@ const PagesContent = ({data}: {data: Countries}) => {
             <SelectRegion />
           </Grid>
         </Grid>
-        <Countries data={data} />
+        <Countries data={searchedData || data} />
       </Stack>
     </Box>
   );
