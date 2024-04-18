@@ -18,13 +18,12 @@ const Countries = ({
   data: Countries | null;
   selectedRegion: string | null;
 }) => {
-  const isEmptyData = isEmpty(data);
-
   const _data =
     !!selectedRegion && selectedRegion !== 'All'
       ? data?.filter((country) => country.region === selectedRegion)
       : data;
 
+  const isEmptyData = isEmpty(_data);
   return (
     <Box
       sx={{
@@ -86,6 +85,7 @@ const Countries = ({
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-evenly',
+                  height: '50%',
                 }}
               >
                 <Tooltip
