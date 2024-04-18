@@ -22,7 +22,6 @@ const PagesContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
         alignItems: 'center',
         minHeight: '100vh',
         height: 'fit-content',
-        width: '100vw',
         color: `${theme.palette.primary.main}`,
       }}
     >

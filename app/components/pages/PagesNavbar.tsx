@@ -15,9 +15,10 @@ const PagesNavbar = () => {
         justifyContent: 'space-between',
         alignItems: 'center',
         display: 'flex',
-        width: 'inherit',
+        minWidth: '100%',
+        width: '100vw',
         backgroundColor: 'secondary.main',
-        padding: {md: '0 70px', xs: '0 20px'},
+        padding: {md: '0 50px', xs: '0 20px'},
         height: '70px',
         boxShadow: darkMode ? null : '1px 1px 5px hsl(0, 0%, 89%)',
       }}

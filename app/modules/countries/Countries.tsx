@@ -15,12 +15,13 @@ const Countries = ({data}: {data: Countries}) => {
     <Box
       sx={{
         maxHeight: '650px',
-        minHeight: '80%',
+        minHeight: {xs: '100vh', md: '80%'},
+        height: 'fit-content',
         overflowY: 'auto',
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'space-evenly',
-        alignItems: 'center',
+        alignItems: {xs: 'flex-start', sm: 'center'},
         gap: 3,
         '&::-webkit-scrollbar': {
           width: '6px',
@@ -36,7 +37,6 @@ const Countries = ({data}: {data: Countries}) => {
           background: '#555',
         },
         width: '100%',
-        height: '100vh',
       }}
     >
       {data.length > 0 ? (
@@ -46,17 +46,18 @@ const Countries = ({data}: {data: Countries}) => {
           return (
             <Card
               sx={{
-                width: {xs: '100%', sm: 230},
-                height: {xs: 500, sm: 300},
+                width: {xs: '100%', sm: 300},
+                height: {xs: 400, sm: 300},
                 bgcolor: 'secondary.main',
               }}
               key={index}
             >
               <CardMedia
+                component="img"
                 sx={{
-                  height: {xs: 250, sm: 150},
-                  width: {xs: '100%', sm: 230},
-                  objectFit: 'contain',
+                  height: {xs: '50%', sm: 150},
+                  width: {xs: '100%', sm: 300},
+                  objectFit: 'cover',
                 }}
                 image={flags.svg}
                 title="test"
@@ -64,7 +65,7 @@ const Countries = ({data}: {data: Countries}) => {
               <CardContent
                 sx={{
                   width: {xs: 325, sm: 230},
-                  height: {xs: 250, sm: 150},
+                  height: {xs: '50%', sm: 150},
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-evenly',
