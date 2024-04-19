@@ -14,7 +14,7 @@ const PagesContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
     <Box
       sx={{
         display: 'grid',
-        background: `${theme.palette.background.default}`,
+        background: theme.palette.background.default,
         gridTemplate: `
           'navbar navbar navbar' 70px
           'content content content' 1fr`,
@@ -22,7 +22,7 @@ const PagesContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
         alignItems: 'center',
         minHeight: '100vh',
         height: 'fit-content',
-        color: `${theme.palette.primary.main}`,
+        color: theme.palette.primary.main,
       }}
     >
       {children}
