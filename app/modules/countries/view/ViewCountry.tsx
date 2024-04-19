@@ -1,5 +1,4 @@
 import {Box} from '@mui/material';
-import {MAP_ACCESS_TOKEN} from 'app/configs/constants';
 
 import dynamic from 'next/dynamic';
 
@@ -29,7 +28,7 @@ const ViewCountry = ({data}: {data: Country[]}) => {
 
       {capital}
 
-      <Map latlng={latlng} token={MAP_ACCESS_TOKEN} />
+      <Map latlng={latlng} />
     </Box>
   );
 };

@@ -3,7 +3,6 @@ type LatLngTuple = import('leaflet').LatLngTuple;
 declare namespace NodeJS {
   interface ProcessEnv {
     NEXT_PUBLIC_API_URL: string;
-    ACCESS_TOKEN: string;
   }
 }
 

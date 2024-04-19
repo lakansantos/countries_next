@@ -11,27 +11,12 @@ import 'leaflet/dist/leaflet.css';
 
 import MapViewOnClick from './MapViewOnClick';
 import MapResetPosition from './MapResetPosition';
-import {useThemeToggle} from 'app/hooks/useThemeModeToggle';
 
-const Map = ({latlng, token}: {latlng: LatLngTuple; token: string}) => {
+const Map = ({latlng}: {latlng: LatLngTuple}) => {
   const [map, setMap] = useState<L.Map | null>(null);
-
-  const {darkMode} = useThemeToggle();
 
   L.Icon.Default.imagePath = '/';
 
-  const tileLayerValues = darkMode
-    ? {
-        attribution:
-          '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        url: `https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png`,
-        accessToken: token,
-      }
-    : {
-        attribution: 'Stamen Design',
-        url: `https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}{r}.png`,
-        accessToken: token,
-      };
   return (
     <div id="map">
       {map ? <MapResetPosition map={map} center={latlng} /> : null}
@@ -42,7 +27,10 @@ const Map = ({latlng, token}: {latlng: LatLngTuple; token: string}) => {
         scrollWheelZoom={true}
         ref={setMap}
       >
-        <TileLayer {...tileLayerValues} />
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
         <Marker position={latlng}></Marker>
         <MapViewOnClick />
       </MapContainer>
