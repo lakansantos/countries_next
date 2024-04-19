@@ -13,6 +13,7 @@ import 'leaflet/dist/leaflet.css';
 import MapViewOnClick from './MapViewOnClick';
 import MapResetPosition from './MapResetPosition';
 import {useThemeToggle} from 'app/hooks/useThemeModeToggle';
+import {MAP_ACCESS_TOKEN} from 'app/configs/constants';
 
 const Map = ({latlng}: {latlng: LatLngTuple}) => {
   const [map, setMap] = useState<L.Map | null>(null);
@@ -25,11 +26,13 @@ const Map = ({latlng}: {latlng: LatLngTuple}) => {
     ? {
         attribution:
           '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        url: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+        url: `https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?accessToken=${MAP_ACCESS_TOKEN}`,
+        accessToken: MAP_ACCESS_TOKEN,
       }
     : {
         attribution: 'Stamen Design',
-        url: 'https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}{r}.png',
+        url: `https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}{r}.png?accessToken=${MAP_ACCESS_TOKEN}`,
+        accessToken: MAP_ACCESS_TOKEN,
       };
   return (
     <div id="map">
