@@ -20,12 +20,6 @@ const ViewCountry = ({data}: {data: Country[]}) => {
         flexDirection: 'column',
       }}
     >
-      {/* {name.common}
-      {population}
-      {region}
-
-      {capital} */}
-
       <Map data={data[0]} />
     </Box>
   );
