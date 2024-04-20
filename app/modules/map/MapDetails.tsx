@@ -91,7 +91,7 @@ const MapDetails = ({data}: {data: Country}) => {
           }}
           onClick={toggleOpenTab}
         >
-          {openTab ? <ArrowRightIcon /> : <ArrowLeftIcon />}
+          {openTab ? <ArrowLeftIcon /> : <ArrowRightIcon />}
         </Button>
       </ThemeProvider>
 
