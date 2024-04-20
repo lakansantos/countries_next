@@ -111,7 +111,7 @@ const Map = ({data}: {data: Country}) => {
             ) : (
               <CardMedia
                 component="img"
-                image={coatOfArms.png}
+                image={coatOfArms.svg}
                 title=""
                 sx={{
                   height: 100,
