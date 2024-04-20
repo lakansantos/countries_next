@@ -7,8 +7,13 @@ declare namespace NodeJS {
 }
 
 type Country = {
+  coatOfArms: {
+    png: string;
+    svg: string;
+  };
   name: {
     common: string;
+    nativeName: Record<string>;
   };
   latlng: LatLngTuple;
   capitalInfo: {
@@ -17,6 +22,7 @@ type Country = {
   flags: {
     svg: string;
     png: string;
+    alt: string;
   };
   region: string;
   capital: string[];

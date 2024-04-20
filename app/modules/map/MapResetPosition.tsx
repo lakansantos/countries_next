@@ -1,32 +1,48 @@
-import {Button} from '@mui/material';
-import React, {useCallback, useEffect, useState} from 'react';
+import {Box, Button} from '@mui/material';
+import React, {useCallback} from 'react';
+import MyLocationIcon from '@mui/icons-material/MyLocation';
 
 const zoom = 5;
 const MapResetPosition = ({map, center}: {map: L.Map; center: LatLngTuple}) => {
-  const [position, setPosition] = useState(() => map.getCenter());
-
   const onClick = useCallback(() => {
-    map.setView(center, zoom);
+    map.setView(center, zoom, {
+      animate: true,
+      duration: 1.5,
+      easeLinearity: 300,
+    });
   }, [map, center]);
 
-  const onMove = useCallback(() => {
-    setPosition(map.getCenter());
-  }, [map]);
-
-  useEffect(() => {
-    map.on('move', onMove);
-    return () => {
-      map.off('move', onMove);
-    };
-  }, [map, onMove]);
-
   return (
-    <p>
-      latitude: {position.lat.toFixed(4)}, longitude: {position.lng.toFixed(4)}{' '}
-      <Button onClick={onClick} variant="contained">
-        reset
+    <Box
+      sx={{
+        position: 'absolute',
+        right: 12,
+        bottom: 95,
+        zIndex: 400,
+      }}
+    >
+      <Button
+        onClick={onClick}
+        variant="contained"
+        sx={{
+          bgcolor: '#fff',
+          color: '#000',
+          padding: 0,
+          minWidth: 30,
+          minHeight: 30,
+          '&:hover': {
+            bgcolor: '#f2f0f0',
+          },
+        }}
+      >
+        <MyLocationIcon
+          sx={{
+            width: 15,
+            height: 15,
+          }}
+        />
       </Button>
-    </p>
+    </Box>
   );
 };
 

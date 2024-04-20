@@ -5,8 +5,6 @@ import dynamic from 'next/dynamic';
 import React from 'react';
 
 const ViewCountry = ({data}: {data: Country[]}) => {
-  const {name, population, region, latlng, capital} = data[0];
-
   const Map = dynamic(() => import('modules/map/Map'), {
     loading: () => <p>Loading ...</p>,
   });
@@ -22,13 +20,13 @@ const ViewCountry = ({data}: {data: Country[]}) => {
         flexDirection: 'column',
       }}
     >
-      {name.common}
+      {/* {name.common}
       {population}
       {region}
 
-      {capital}
+      {capital} */}
 
-      <Map latlng={latlng} />
+      <Map data={data[0]} />
     </Box>
   );
 };
