@@ -26,7 +26,17 @@ const Map = ({data}: {data: Country}) => {
 
   L.Icon.Default.imagePath = '/';
 
-  const {latlng, flags, coatOfArms, name} = data;
+  const {
+    latlng,
+    flags,
+    coatOfArms,
+    region,
+    languages,
+    capital,
+    population,
+    name,
+    timezones,
+  } = data;
 
   const nativeNameKeys = Object.keys(name.nativeName);
   const nativeNameKey =
@@ -35,6 +45,11 @@ const Map = ({data}: {data: Country}) => {
       : nativeNameKeys.find((key) => key !== 'eng');
 
   const commonNativeName = name.nativeName[nativeNameKey].common;
+  const formattedLanguages = Object.entries(languages)
+    .map((lang) => {
+      return lang[1];
+    })
+    .join(', ');
 
   return (
     <div id="map">
@@ -62,7 +77,7 @@ const Map = ({data}: {data: Country}) => {
           top: 0,
           height: '100%',
           zIndex: 400,
-          width: {xs: '100%', sm: 400},
+          width: {xs: '80%', sm: 400},
         }}
       >
         <Card
@@ -120,6 +135,69 @@ const Map = ({data}: {data: Country}) => {
                 }}
               />
             )}
+          </CardContent>
+          <Divider />
+          <CardContent
+            sx={{
+              px: 3,
+            }}
+          >
+            <Box>
+              <Typography
+                component="span"
+                variant="subtitle1"
+                fontWeight="bold"
+              >
+                Region:{' '}
+              </Typography>
+              <Typography sx={{display: 'inline'}}>{region}</Typography>
+            </Box>
+            <Box>
+              <Typography
+                component="span"
+                variant="subtitle1"
+                fontWeight="bold"
+              >
+                Capital:{' '}
+              </Typography>
+              <Typography sx={{display: 'inline'}}>{capital}</Typography>{' '}
+            </Box>
+            <Box>
+              <Typography
+                component="span"
+                variant="subtitle1"
+                fontWeight="bold"
+              >
+                Population:{' '}
+              </Typography>
+              <Typography sx={{display: 'inline'}}>
+                {population.toLocaleString()}
+              </Typography>
+            </Box>
+            <Box>
+              <Typography
+                component="span"
+                variant="subtitle1"
+                fontWeight="bold"
+              >
+                Languages:{' '}
+              </Typography>
+              <Typography sx={{display: 'inline'}}>
+                {formattedLanguages}
+              </Typography>
+            </Box>
+            <Box>
+              <Typography
+                component="span"
+                variant="subtitle1"
+                fontWeight="bold"
+              >
+                Timezones:{' '}
+              </Typography>
+              <Typography sx={{display: 'inline'}}>
+                {timezones.join(', ')}
+              </Typography>
+            </Box>
           </CardContent>
           <Divider />
         </Card>

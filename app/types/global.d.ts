@@ -28,6 +28,8 @@ type Country = {
   capital: string[];
   population: number;
   cca2: string;
+  languages: [];
+  timezones: string[];
 };
 
 type Countries = Country[];
