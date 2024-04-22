@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 
 import React from 'react';
 
-const ViewCountry = ({data}: {data: Country[]}) => {
+const ViewCountry = ({data = []}: {data: Country[]}) => {
   const Map = dynamic(() => import('modules/map/Map'), {
     loading: () => <p>Loading ...</p>,
   });

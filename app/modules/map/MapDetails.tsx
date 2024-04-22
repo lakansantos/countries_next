@@ -13,6 +13,7 @@ import {
 import {isEmpty} from 'lodash';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+
 import {useThemeToggle} from 'app/hooks/useThemeModeToggle';
 import useToggleSideMap from './useToggleSideMap';
 
@@ -26,8 +27,8 @@ const MapDetails = ({data}: {data: Country}) => {
     population,
     name,
     timezones,
-  } = data;
-  const nativeNameKeys = Object.keys(name.nativeName);
+  } = data ?? {};
+  const nativeNameKeys = Object.keys(name?.nativeName);
   const nativeNameKey =
     nativeNameKeys.length === 1
       ? nativeNameKeys
@@ -94,7 +95,6 @@ const MapDetails = ({data}: {data: Country}) => {
           {openTab ? <ArrowLeftIcon /> : <ArrowRightIcon />}
         </Button>
       </ThemeProvider>
-
       <Card
         sx={{
           height: '100%',

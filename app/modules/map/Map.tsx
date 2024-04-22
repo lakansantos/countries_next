@@ -12,13 +12,14 @@ import 'leaflet/dist/leaflet.css';
 import MapViewOnClick from './MapViewOnClick';
 import MapResetPosition from './MapResetPosition';
 import MapDetails from './MapDetails';
+import {isEmpty} from 'lodash';
 
 const Map = ({data}: {data: Country}) => {
   const [map, setMap] = useState<L.Map | null>(null);
 
   L.Icon.Default.imagePath = '/';
 
-  const {latlng} = data;
+  const {latlng = [13.33, -16.33]} = data || {};
 
   return (
     <div id="map">
@@ -39,7 +40,7 @@ const Map = ({data}: {data: Country}) => {
       </MapContainer>
 
       {map ? <MapResetPosition map={map} center={latlng} /> : null}
-      <MapDetails data={data} />
+      {!isEmpty(data) ? <MapDetails data={data} /> : null}
     </div>
   );
 };

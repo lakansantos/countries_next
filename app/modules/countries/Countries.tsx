@@ -11,6 +11,7 @@ import {
 import SearchIcon from '@mui/icons-material/Search';
 import {isEmpty} from 'lodash';
 import {useRouter} from 'next/navigation';
+import {queryStringify} from 'configs/http';
 
 const Countries = ({
   data = [],
@@ -65,6 +66,7 @@ const Countries = ({
           const {name, population, region, flags, cca2, capital} = country;
           const isCountryNameLong = name.common.length >= 20;
 
+          const searchedQuery = queryStringify({code: cca2});
           return (
             <Card
               sx={{
@@ -78,7 +80,7 @@ const Countries = ({
                 transition: '0.3s',
               }}
               key={index}
-              onClick={() => router.push('/' + cca2)}
+              onClick={() => router.push('/maps' + '?' + searchedQuery)}
             >
               <CardMedia
                 component="img"
