@@ -13,6 +13,7 @@ const ViewCountry = ({data}: {data: Country[]}) => {
     <Box
       sx={{
         display: 'flex',
+        gridArea: 'content',
         justifyContent: 'center',
         alignItems: 'center',
         width: '100vw',
