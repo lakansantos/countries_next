@@ -20,8 +20,8 @@ const PagesContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
           'content content content' 1fr`,
         justifyContent: 'center',
         alignItems: 'center',
-        minHeight: '100vh',
-        height: 'fit-content',
+        height: '100vh',
+        maxHeight: 'fit-content',
         color: theme.palette.primary.main,
       }}
     >

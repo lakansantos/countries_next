@@ -19,6 +19,7 @@ const PagesContent = ({data}: {data: Countries}) => {
       sx={{
         gridArea: 'content',
         height: '100%',
+        overflowX: 'hidden',
       }}
     >
       <Stack
