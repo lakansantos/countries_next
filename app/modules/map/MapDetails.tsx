@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+import Image from 'next/image';
 import {
   Box,
   Button,
@@ -6,6 +7,7 @@ import {
   CardContent,
   CardMedia,
   Divider,
+  Skeleton,
   ThemeProvider,
   Typography,
   createTheme,
@@ -65,6 +67,9 @@ const MapDetails = ({data}: {data: Country}) => {
 
   const {openTab, toggleOpenTab} = useToggleSideMap();
 
+  const [isImageRendered, setIsImageRendered] = useState(false);
+
+  console.log(isImageRendered);
   return (
     <Box
       sx={{
@@ -83,6 +88,7 @@ const MapDetails = ({data}: {data: Country}) => {
           variant="contained"
           sx={{
             top: '50%',
+            transform: 'translateY(-50%)',
             right: -32,
             zIndex: -1,
             height: 70,
@@ -140,16 +146,21 @@ const MapDetails = ({data}: {data: Country}) => {
               N/A
             </Box>
           ) : (
-            <CardMedia
-              component="img"
-              image={coatOfArms.svg}
-              title=""
-              sx={{
-                height: 100,
-                width: 100,
-                objectFit: 'fill',
-              }}
-            />
+            <React.Fragment>
+              <Image
+                height={100}
+                width={100}
+                src={coatOfArms.svg}
+                style={{
+                  opacity: isImageRendered ? '1' : '0',
+                }}
+                alt="image"
+                onLoad={() => setIsImageRendered(true)}
+              />
+              {!isImageRendered && (
+                <Skeleton variant="rectangular" width={100} height={100} />
+              )}
+            </React.Fragment>
           )}
         </CardContent>
         <Divider />
